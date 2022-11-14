@@ -1,0 +1,11 @@
+<%- include("header"); -%>
+  <h1> The Site </h1>
+
+  <input type="date" id="start" name="trip-start" >
+  <% for( var i = 0; i < shoesArray.length; i ++) { %>
+    <div class="btn">
+      <h1><%= shoesArray[i].shoeName %></h1>
+      <button type="button" name="button"> je suis une chaussure </button>
+    </div>
+  <% } %>
+<%- include("footer"); -%>

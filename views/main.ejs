@@ -1,0 +1,65 @@
+
+
+<%- include("header"); -%>
+
+<div class="bdy">
+
+<div class="classement-div">
+  <% for(let i = 0; i < 100; i = i + 2) { %>
+    <div class="element-classement">
+      <% if (typeof bestDeal[i] !== "undefined"){ %>
+      <img src="<%= bestDeal[i].thumbnail; %>" alt="">
+      <% } %>
+      <% if (typeof bestDeal[i] !== "undefined"){ %>
+      <p> <%= bestDeal[i].shoeName; %> </p>
+      <% } %>
+      <p> <%= bestDeal[i + 1]; %> </p>
+    </div>
+    <% } %>
+</div>
+
+
+
+  <% for ( let m = 0; m < 7; m ++){ %>
+    <div class="days">
+      <h1><%= dateArray[m]; %></h1>
+    <% var p = 0; %>
+    <% if ( typeof daysArray[m] !== 'undefined'){ %>
+    <% p = daysArray[m].length; %>
+    <% } %>
+    <% for( let i = 0; i < p; i ++) { %>
+      <form class="btn" action="/<%=daysArray[m][i].id; %>" method="get">
+        <h1><%=daysArray[m][i].shoeName; %></h1>
+        <input  type="hidden" name= "p" value = <%= daysArray[m][i].id; %>>
+        <button type="submit" name="button" >
+          <h1><%=daysArray[m][i].shoeName; %></h1>
+          <img class= "imgS"src=<%= daysArray[m][i].thumbnail; %> alt= <%= daysArray[m][i].shoeName; %>>
+          <% let sP = daysArray[m][i].lowestResellPrice.stockX; %>
+          <% let fP = daysArray[m][i].lowestResellPrice.flightClub; %>
+          <% let gP = daysArray[m][i].lowestResellPrice.goat; %>
+          <% var diffP = 0; %>
+          <% var ind = 0; %>
+          <% const arrayP = [sP, fP, gP]; %>
+          <% for (let i = 0; i < 3; i ++){ %>
+            <% if (typeof arrayP[i] === "undefined") { %>
+              <% arrayP.splice(i, 1, 0); %>
+            <% } %>
+          <% } %>
+          <% if (Number.isNaN(daysArray[m][i].retailPrice)){ %>
+          <% diffP = "No retail price"; %>
+          <% } else { %>
+            <% for ( let i = 0; i < arrayP.length - 1; i++){ %>
+              <% if (arrayP[i + 1] > arrayP[i]){ %>
+                <% ind = i + 1; %>
+              <% } %>
+            <% } %>
+            <% diffP = arrayP[ind] - daysArray[m][i].retailPrice; %>
+          <% } %>
+          <h3><%= diffP; %></h3>
+        </button>
+      </form>
+    <% } %>
+    </div>
+  <% } %>
+</div>
+<%- include("footer"); -%>

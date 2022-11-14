@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+      <link rel="stylesheet" href="/css/style.css">
+    <title>search me</title>
+  </head>
+  <body>
+    <input type="hidden" name="re" value="">
+    <div id="searchresult" class ="hu">
+        <% var w = 0; %>
+        <% if ( typeof shoesSearch !== 'undefined') { %>
+        <% w = shoesSearch.length; %>
+        <% console.log("la"); %>
+        <% } %>
+        <% for( let i = 0; i < w; i ++) { %>
+          <form class="btnshoe hu" action="/<%= shoesSearch[i].id %>" method="get">
+            <div class="search hu">
+            <button class= "search-tab hu" type="button" name="button">
+              <img class ="hu" src = "<%= shoesSearch[i].thumbnail %>">
+              <p class = "hu"> <%= shoesSearch[i].shoeName; %> </p>
+              <% let retailP = shoesSearch[i].retailPrice; %>
+              <% if (isNaN(retailP)) { %>
+                <% retailP = "no Price"; %>
+              <% } %>
+              <p><%= retailP; %></p>
+            </button>
+            </div>
+          </form>
+      <% } %>
+    </div>
+  </body>
+</html>
